@@ -47,6 +47,10 @@ export default class GoogleDrive implements NativeRNCloudStorage {
     });
   }
 
+  public static set timeout(timeout: number) {
+    GoogleDrive.drive.timeout = timeout;
+  }
+
   public static get accessToken(): string | null {
     return GoogleDrive.drive.accessToken.length ? GoogleDrive.drive.accessToken : null;
   }

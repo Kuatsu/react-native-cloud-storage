@@ -157,6 +157,10 @@ The access token is stored statically and therefore only needs to be provided on
 
 If enabled, the library will throw **before** a file operation if there are multiple files with the given path found. Does not have any effect on iOS. Enabling this will disable any subscribers created via [`subscribeToFilesWithSameName()`](#subscribetofileswithsamenamesubscriber). For more information, [see here](../guides/google-drive-files-same-name).
 
+### `setTimeout(timeout)`
+
+Sets the timeout for fetch operations on Google Drive API. Defaults to 3000 milliseconds.
+
 ### `stat(path, scope)`
 
 Gets several file statistics of the file at the given path.

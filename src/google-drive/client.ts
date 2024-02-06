@@ -25,9 +25,12 @@ export class GoogleDriveHttpError extends Error {
 // TODO: properly handle errors
 export default class GoogleDriveApiClient {
   public accessToken: string;
+  public timeout: number;
+  private _fetchTimeout: any;
 
   constructor(accessToken: string = '') {
     this.accessToken = accessToken;
+    this.timeout = 3000;
   }
 
   private buildQueryString(query: object): string {
@@ -53,14 +56,19 @@ export default class GoogleDriveApiClient {
     if (queryParameters) {
       path += this.buildQueryString(queryParameters);
     }
+    clearTimeout(this._fetchTimeout);
+    const abortController: AbortController = new AbortController();
+    this._fetchTimeout = setTimeout(() => {
+      abortController.abort();
+    }, this.timeout);
     const response = await fetch(path, {
       ...options,
       headers: {
         ...options.headers,
         Authorization: `Bearer ${this.accessToken}`,
       },
+      signal: abortController.signal,
     });
-
     if (!response.ok) {
       let errorMessage: string;
       let json: any = null;

@@ -13,6 +13,7 @@ const RNCloudStorage = {
   getGoogleDriveAccessToken: () => GoogleDrive.accessToken,
   setGoogleDriveAccessToken: (accessToken: string | null) => (GoogleDrive.accessToken = accessToken),
   setThrowOnFilesWithSameName: (enable: boolean) => (GoogleDrive.throwOnFilesWithSameName = enable),
+  setTimeout: (timeout: number) => (GoogleDrive.timeout = timeout),
   /* eslint-disable @typescript-eslint/no-unused-vars */
   subscribeToFilesWithSameName:
     Platform.OS === 'ios'
